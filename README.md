@@ -11,8 +11,9 @@ development mode로 실행합니다.
 
 만든 app을 배포에 적합하게 변환합니다.
 결과물은 /build에 생성됩니다.
-
-## 초기 세팅 방법
+<details>
+<summary>초기 세팅 방법</summary>
+<div markdown="1">
 
 1. node 설치 확인
    
@@ -43,3 +44,122 @@ development mode로 실행합니다.
         ...,
         }
     ```
+</div>
+</details>
+
+<details>
+<summary>컴포넌트 만들기</summary>
+<div markdown="1">
+
+1. src/Component 폴더 만들기
+2. src/Component/makeComponent 폴더 만들기
+   
+   필수는 아니지만, 나중에 컴포넌트가 늘어나면 관리하기 편하게 하기위해 미리 분리
+3. src/Component/makeComponent 안에 js 파일 만들기
+   
+   함수명의 시작은 대문자로, 마지막은 export default로 내보내기
+   
+```
+   function Button({name}) {
+    return (
+    <>
+      <button>{name}</button>
+    </>
+    );
+  }
+  
+  export default Button;
+```
+
+</div>
+</details>
+
+
+<details>
+<summary>props 넘기기</summary>
+<div markdown="1">
+
+props를 받을 자식 컴포넌트의 함수에 props를 받을 수있게 하고
+
+부모에서 import후 속성값으로 넣어주면 됩니다.
+
+```
+// props를 받을 자식 컴포넌트
+function Button({name}) {
+    return (
+    <>
+      <button>{name}</button>
+    </>
+    );
+  }
+  
+  export default Button;
+```
+```
+// props를 넘길 부모
+import Button from '../../Componet/button';
+
+const HomePage = () =>{
+    return(
+        <>
+        <h2>HomePage</h2>
+        <Button name={'ㅁㄴㅇ'}/>
+        </>
+    );
+};
+
+export default HomePage;
+```
+</div>
+</details>
+
+
+<details>
+<summary>react-router-dom</summary>
+<div markdown="1">
+
+1. react-router-dom 설치
+   
+```
+npm install react-router-dom
+```
+
+2. RouterProvider 설정
+
+```
+// main.js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { RouterProvider } from 'react-router-dom';
+import rootRouter from './router/router';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <RouterProvider router={rootRouter}/>
+  </React.StrictMode>
+);
+```
+
+3. src/router/router.js 생성
+
+```
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import Layout from '../Layouts/Layout.js'
+import HomePage from '../Pages/Home/home.js'
+import DetailPage from '../Pages/detail/detail.js'
+const route = (
+    <Route element={<Layout/>}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/detail" element={<DetailPage />} />
+    </Route>
+);
+
+const rootRouter = createBrowserRouter(
+    createRoutesFromElements(route));
+export default rootRouter
+```
+
+</div>
+</details>

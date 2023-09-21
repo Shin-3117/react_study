@@ -1,10 +1,10 @@
-// import Button from '../../Componet/button';
-import React from 'react';
+import Button from '../../Component/button';
+
 const HomePage = () =>{
     return(
         <>
         <h2>HomePage</h2>
-        {/* <Button></Button> */}
+        <Button name={'ㅁㄴㅇ'}/>
         </>
     );
 };
