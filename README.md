@@ -161,5 +161,10 @@ const rootRouter = createBrowserRouter(
 export default rootRouter
 ```
 
+`createBrowserRouter`DOM History API를 사용하여 URL을 업데이트하고 history 스택을 관리합니다.
+
+`createRoutesFromElements`는 <Route> 요소에서 경로 객체를 생성하는 도우미입니다. 
+객체 대신 JSX로 경로를 생성하려는 경우 유용합니다.
+
 </div>
 </details>
