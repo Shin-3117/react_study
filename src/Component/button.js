@@ -1,7 +1,11 @@
-function Button({name}) {
+import './button.css';
+
+function Button({children, ...props}) {
     return (
     <>
-      <button>{name}</button>
+      <button className='Button'
+        {...props}
+      >{children}</button>
     </>
     );
   }

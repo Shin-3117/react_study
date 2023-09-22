@@ -44,6 +44,8 @@ development mode로 실행합니다.
         ...,
         }
     ```
+
++. index.css에 Reset CSS 적용하기
 </div>
 </details>
 
@@ -60,10 +62,12 @@ development mode로 실행합니다.
    함수명의 시작은 대문자로, 마지막은 export default로 내보내기
    
 ```
-   function Button({name}) {
+function Button({children, ...props}) {
     return (
     <>
-      <button>{name}</button>
+      <button className='Button'
+        {...props}
+      >{children}</button>
     </>
     );
   }
@@ -85,10 +89,12 @@ props를 받을 자식 컴포넌트의 함수에 props를 받을 수있게 하�
 
 ```
 // props를 받을 자식 컴포넌트
-function Button({name}) {
+function Button({children, ...props}) {
     return (
     <>
-      <button>{name}</button>
+      <button className='Button'
+        {...props}
+      >{children}</button>
     </>
     );
   }
@@ -165,6 +171,75 @@ export default rootRouter
 
 `createRoutesFromElements`는 <Route> 요소에서 경로 객체를 생성하는 도우미입니다. 
 객체 대신 JSX로 경로를 생성하려는 경우 유용합니다.
+
+</div>
+</details>
+
+<details>
+<summary>modal component</summary>
+<div markdown="1">
+
+1. useState를 이용하여 모달on/off 관리하기
+2. 모달의 내용이 있는 부분은 클릭해도 안 닫히도록 버블링 방지
+   
+   `onClick={(e) => e.stopPropagation()}`
+
+   버블링(bubbling): 한 요소에 이벤트가 발생하면, 이 요소에 할당된 핸들러가 동작하고, 이어서 부모 요소의 핸들러가 동작합니다. 
+   가장 최상단의 조상 요소를 만날 때까지 이 과정이 반복되면서 요소 각각에 할당된 핸들러가 동작합니다.
+```
+// modal.js
+import './modal.css';
+import { useState } from 'react';
+
+const Modal = ({children}) => {
+    const [modalOpen, setmodalOpen] = useState(false)
+    const showModal = () =>{
+        setmodalOpen(!modalOpen);
+    }
+
+    return(
+<>
+<button onClick={showModal}>modal open</button>
+{modalOpen && 
+  <div className="modalBackground" onClick={showModal}>
+      <div className="modalContainer" 
+      // 현재 이벤트가 캡처링/버블링 단계에서 더 이상 전파되지 않도록 방지
+      onClick={(e) => e.stopPropagation()}>
+          <h3>Modal</h3>
+          <p>{children}</p>
+          <Button onClick={showModal}>close modal</Button>
+      </div>
+  </div>
+}
+</>
+    )
+}
+
+export default Modal;
+```
+
+3. z-index를 이용하여 모달창을 페이지 위에 띄우기
+4. `position: abolute;` 로 CSS nomal flow에서 제외하기
+
+```
+.modalBackground{
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top:0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modalContainer{
+    z-index: 2;
+    background-color: white;
+    width: 300px;
+}
+```
 
 </div>
 </details>
