@@ -11,44 +11,47 @@ development mode로 실행합니다.
 
 만든 app을 배포에 적합하게 변환합니다.
 결과물은 /build에 생성됩니다.
+
+#### 초기 세팅 방법
 <details>
-<summary>초기 세팅 방법</summary>
-<div markdown="1">
+  <summary>초기 세팅 방법</summary>
+  <div markdown="1">
 
-1. node 설치 확인
-   
-   `node -v`
-   
-   버전이 나타나지 않는 다면 node 설치하기
+  1. node 설치 확인
+    
+    `node -v`
+    
+    버전이 나타나지 않는 다면 node 설치하기
 
-2. 리액트 설치하기
-   
-   `npm install react`
+  2. 리액트 설치하기
+    
+    `npm install react`
 
-3. 리액트 초기 환경 세팅하기
-   
-   `npx create-react-app 프로젝트이름`
-   
-   /프로젝트이름 안에 리액트 초기 환경을 만들어 줍니다.
+  3. 리액트 초기 환경 세팅하기
+    
+    `npx create-react-app 프로젝트이름`
+    
+    /프로젝트이름 안에 리액트 초기 환경을 만들어 줍니다.
 
-4. 생성한 프로젝트로 이동
-   
-   `cd 프로젝트이름`
+  4. 생성한 프로젝트로 이동
+    
+    `cd 프로젝트이름`
 
-    이동 안 하고 `npm start`하면 오류 발생!
+      이동 안 하고 `npm start`하면 오류 발생!
 
-    프로젝트이름/package.json 안에 scripts에 `npm start`가 동작하게 되있기 때문에 오류가 발생합니다.
-    ```
-    "scripts": {
-        "start": "react-scripts start",
-        ...,
-        }
-    ```
+      프로젝트이름/package.json 안에 scripts에 `npm start`가 동작하게 되있기 때문에 오류가 발생합니다.
+      ```
+      "scripts": {
+          "start": "react-scripts start",
+          ...,
+          }
+      ```
 
-+. index.css에 Reset CSS 적용하기
-</div>
+  +. index.css에 Reset CSS 적용하기
+  </div>
 </details>
 
+#### 컴포넌트 만들기
 <details>
 <summary>컴포넌트 만들기</summary>
 <div markdown="1">
@@ -78,7 +81,7 @@ function Button({children, ...props}) {
 </div>
 </details>
 
-
+#### props 넘기기
 <details>
 <summary>props 넘기기</summary>
 <div markdown="1">
@@ -119,7 +122,7 @@ export default HomePage;
 </div>
 </details>
 
-
+#### react-router-dom
 <details>
 <summary>react-router-dom</summary>
 <div markdown="1">
@@ -175,6 +178,8 @@ export default rootRouter
 </div>
 </details>
 
+
+#### modal component
 <details>
 <summary>modal component</summary>
 <div markdown="1">
@@ -239,6 +244,43 @@ export default Modal;
     background-color: white;
     width: 300px;
 }
+```
+
+</div>
+</details>
+
+#### Link
+<details>
+<summary>Link</summary>
+<div markdown="1">
+
+1. 사전 라우터 설정 필요
+
+```JS
+import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+
+import App from "../App";
+import Room from "../pages/Room";
+import Lobby from "../pages/Lobby";
+
+const route = (
+    <Route>
+        <Route path="/" element={<App />}></Route>
+        <Route path="room" element={<Room />}></Route>
+        <Route path="lobby" element={<Lobby />}></Route>
+    </Route>
+);
+
+const rootRouter = createBrowserRouter(createRoutesFromElements(route));
+export default rootRouter;
+```
+
+
+2. Link import 후 to에 라우터의 path 입력하여 사용
+```JS
+import { Link } from "react-router-dom"
+
+<Link to='/lobby'>라우팅된 로비로</Link>
 ```
 
 </div>
