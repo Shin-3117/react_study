@@ -251,7 +251,7 @@ export default Modal;
 
 #### Link
 <details>
-<summary>Link</summary>
+<summary>react-router-dom Link</summary>
 <div markdown="1">
 
 1. 사전 라우터 설정 필요
@@ -282,6 +282,30 @@ import { Link } from "react-router-dom"
 
 <Link to='/lobby'>라우팅된 로비로</Link>
 ```
+
+</div>
+</details>
+
+#### JWT JSON Web Token
+<details>
+<summary>JSON Web Token</summary>
+<div markdown="1">
+
+JWT는 JSON 데이터를 Base64 URL-safe Encode 를 통해 인코딩하여 직렬화한 것이며, 토큰 내부에는 위변조 방지를 위해 개인키를 통한 전자서명도 들어있다
+
+[출쳐](https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-JWTjson-web-token-%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC)
+
+사용이유
+- Self-contain: JWT 스스로 인증에 필요한 데이터를 가짐
+- 세션과는 다르게 백엔드 서버가 바뀌어도 인증 가능
+- 모바일 환경에서 다시 로그인 할 필요없음
+
+JWT의 특징
+- Header, Payload (Claim), signature
+- base64형식으로 암호화
+  
+Access token, Refresh token
+둘다 만료된 경우 재로그인
 
 </div>
 </details>
