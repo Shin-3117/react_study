@@ -3,6 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
+
 ### `npm start`
 
 development mode로 실행합니다.
@@ -13,57 +14,62 @@ development mode로 실행합니다.
 결과물은 /build에 생성됩니다.
 
 #### 초기 세팅 방법
+
 <details>
   <summary>초기 세팅 방법</summary>
   <div markdown="1">
 
-  1. node 설치 확인
-    
-    `node -v`
-    
-    버전이 나타나지 않는 다면 node 설치하기
+1. node 설치 확인
 
-  2. 리액트 설치하기
-    
-    `npm install react`
+   `node -v`
 
-  3. 리액트 초기 환경 세팅하기
-    
-    `npx create-react-app 프로젝트이름`
-    
-    /프로젝트이름 안에 리액트 초기 환경을 만들어 줍니다.
+   버전이 나타나지 않는 다면 node 설치하기
 
-  4. 생성한 프로젝트로 이동
-    
-    `cd 프로젝트이름`
+2. 리액트 설치하기
 
-      이동 안 하고 `npm start`하면 오류 발생!
+   `npm install react`
 
-      프로젝트이름/package.json 안에 scripts에 `npm start`가 동작하게 되있기 때문에 오류가 발생합니다.
-      ```
-      "scripts": {
-          "start": "react-scripts start",
-          ...,
-          }
-      ```
+3. 리액트 초기 환경 세팅하기
 
-  +. index.css에 Reset CSS 적용하기
+   `npx create-react-app 프로젝트이름`
+
+   /프로젝트이름 안에 리액트 초기 환경을 만들어 줍니다.
+
+4. 생성한 프로젝트로 이동
+
+   `cd 프로젝트이름`
+
+   이동 안 하고 `npm start`하면 오류 발생!
+
+   프로젝트이름/package.json 안에 scripts에 `npm start`가 동작하게 되있기 때문에 오류가 발생합니다.
+
+   ```
+   "scripts": {
+       "start": "react-scripts start",
+       ...,
+       }
+   ```
+
++. index.css에 Reset CSS 적용하기
+
   </div>
 </details>
 
 #### 컴포넌트 만들기
+
 <details>
 <summary>컴포넌트 만들기</summary>
 <div markdown="1">
 
 1. src/Component 폴더 만들기
 2. src/Component/makeComponent 폴더 만들기
-   
+
    필수는 아니지만, 나중에 컴포넌트가 늘어나면 관리하기 편하게 하기위해 미리 분리
+
 3. src/Component/makeComponent 안에 js 파일 만들기
-   
+
    함수명의 시작은 대문자로, 마지막은 export default로 내보내기
-   
+
 ```
 function Button({children, ...props}) {
     return (
@@ -74,7 +80,7 @@ function Button({children, ...props}) {
     </>
     );
   }
-  
+
   export default Button;
 ```
 
@@ -82,6 +88,7 @@ function Button({children, ...props}) {
 </details>
 
 #### props 넘기기
+
 <details>
 <summary>props 넘기기</summary>
 <div markdown="1">
@@ -101,9 +108,10 @@ function Button({children, ...props}) {
     </>
     );
   }
-  
+
   export default Button;
 ```
+
 ```
 // props를 넘길 부모
 import Button from '../../Componet/button';
@@ -119,16 +127,18 @@ const HomePage = () =>{
 
 export default HomePage;
 ```
+
 </div>
 </details>
 
 #### react-router-dom
+
 <details>
 <summary>react-router-dom</summary>
 <div markdown="1">
 
 1. react-router-dom 설치
-   
+
 ```
 npm install react-router-dom
 ```
@@ -172,25 +182,26 @@ export default rootRouter
 
 `createBrowserRouter`DOM History API를 사용하여 URL을 업데이트하고 history 스택을 관리합니다.
 
-`createRoutesFromElements`는 <Route> 요소에서 경로 객체를 생성하는 도우미입니다. 
+`createRoutesFromElements`는 <Route> 요소에서 경로 객체를 생성하는 도우미입니다.
 객체 대신 JSX로 경로를 생성하려는 경우 유용합니다.
 
 </div>
 </details>
 
-
 #### modal component
+
 <details>
 <summary>modal component</summary>
 <div markdown="1">
 
 1. useState를 이용하여 모달on/off 관리하기
 2. 모달의 내용이 있는 부분은 클릭해도 안 닫히도록 버블링 방지
-   
+
    `onClick={(e) => e.stopPropagation()}`
 
-   버블링(bubbling): 한 요소에 이벤트가 발생하면, 이 요소에 할당된 핸들러가 동작하고, 이어서 부모 요소의 핸들러가 동작합니다. 
+   버블링(bubbling): 한 요소에 이벤트가 발생하면, 이 요소에 할당된 핸들러가 동작하고, 이어서 부모 요소의 핸들러가 동작합니다.
    가장 최상단의 조상 요소를 만날 때까지 이 과정이 반복되면서 요소 각각에 할당된 핸들러가 동작합니다.
+
 ```
 // modal.js
 import './modal.css';
@@ -205,9 +216,9 @@ const Modal = ({children}) => {
     return(
 <>
 <button onClick={showModal}>modal open</button>
-{modalOpen && 
+{modalOpen &&
   <div className="modalBackground" onClick={showModal}>
-      <div className="modalContainer" 
+      <div className="modalContainer"
       // 현재 이벤트가 캡처링/버블링 단계에서 더 이상 전파되지 않도록 방지
       onClick={(e) => e.stopPropagation()}>
           <h3>Modal</h3>
@@ -250,6 +261,7 @@ export default Modal;
 </details>
 
 #### Link
+
 <details>
 <summary>react-router-dom Link</summary>
 <div markdown="1">
@@ -275,8 +287,8 @@ const rootRouter = createBrowserRouter(createRoutesFromElements(route));
 export default rootRouter;
 ```
 
-
 2. Link import 후 to에 라우터의 path 입력하여 사용
+
 ```JS
 import { Link } from "react-router-dom"
 
@@ -287,6 +299,7 @@ import { Link } from "react-router-dom"
 </details>
 
 #### JWT JSON Web Token
+
 <details>
 <summary>JSON Web Token</summary>
 <div markdown="1">
@@ -296,16 +309,25 @@ JWT는 JSON 데이터를 Base64 URL-safe Encode 를 통해 인코딩하여 직
 [출쳐](https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-JWTjson-web-token-%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC)
 
 사용이유
+
 - Self-contain: JWT 스스로 인증에 필요한 데이터를 가짐
 - 세션과는 다르게 백엔드 서버가 바뀌어도 인증 가능
 - 모바일 환경에서 다시 로그인 할 필요없음
 
 JWT의 특징
+
 - Header, Payload (Claim), signature
 - base64형식으로 암호화
-  
+
 Access token, Refresh token
 둘다 만료된 경우 재로그인
 
 </div>
 </details>
+
+#### HOOKS
+
+https://react.dev/reference/react/hooks
+
+useState
+useEffect
